@@ -10,7 +10,7 @@ cd /home/tejsva/Desktop/coding/docmake
 echo "Update: $(date '+%Y-%m-%d %H:%M:%S')" >> daily_log.txt
 
 # Stage changes
-git add daily_log.txt
+git add .
 
 # Commit with timestamp
 git commit -m "Daily auto-commit: $(date '+%Y-%m-%d')"
