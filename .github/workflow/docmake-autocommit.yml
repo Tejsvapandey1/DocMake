@@ -17,7 +17,7 @@ jobs:
 
     - name: Update daily log in docmake
       run: |
-        echo "Update: $(date -u)" >> docmake/daily_log.txt
+        echo "Update: $(date -u)" >> DocMake/daily_log.txt
 
     - name: Commit and push changes
       run: |
