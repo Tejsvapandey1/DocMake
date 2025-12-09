@@ -1,9 +1,9 @@
-name: Auto Commit DocMake Every 4 Hours
+name: Auto Commit Every 4 Hours
 
 on:
   schedule:
-    - cron: "0 */4 * * *"   # Runs every 4 hours
-  workflow_dispatch:        # Allows manual trigger
+    - cron: "0 */4 * * *"
+  workflow_dispatch:
 
 jobs:
   auto-commit:
@@ -12,18 +12,17 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
 
-    - name: Update daily log in docmake
+    - name: Update daily log
       run: |
-        echo "Update: $(date -u)" >> DocMake/daily_log.txt
+        echo "Update: $(date -u)" >> daily_log.txt
 
     - name: Commit and push changes
       run: |
         git config --global user.name "GitHub Action"
         git config --global user.email "action@github.com"
 
-        git add docmake/
-        git commit -m "Auto-commit (DocMake): $(date -u)" || echo "No changes to commit"
+        git add daily_log.txt
+        git commit -m "Auto-commit: $(date -u)" || echo "No changes to commit"
+
         git push origin main
