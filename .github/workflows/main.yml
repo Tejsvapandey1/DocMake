@@ -2,7 +2,7 @@ name: Auto Commit Every 4 Hours
 
 on:
   schedule:
-    - cron: "0 */4 * * *"
+    - cron: "0 */1 * * *"
   workflow_dispatch:
 
 jobs:
