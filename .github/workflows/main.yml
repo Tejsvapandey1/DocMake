@@ -19,8 +19,9 @@ jobs:
 
     - name: Commit and push changes
       run: |
-        git config --global user.name "GitHub Action"
-        git config --global user.email "action@github.com"
+        # SET YOUR IDENTITY HERE
+        git config --global user.name "Tejsvapandey1"
+        git config --global user.email "tejsva.pandey2023@vitstudent.ac.in "
 
         git add daily_log.txt
         git commit -m "Auto-commit: $(date -u)" || echo "No changes to commit"
