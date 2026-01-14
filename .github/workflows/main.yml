@@ -1,28 +1,32 @@
-name: Auto Commit Every 4 Hours
+name: Auto Commit on Push
 
 on:
-  schedule:
-    - cron: "0 */1 * * *"
+  push:
+    branches:
+      - main
   workflow_dispatch:
 
 jobs:
   auto-commit:
+    # Prevent infinite loop
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: true
 
-    - name: Update daily log
-      run: |
-        echo "Update: $(date -u)" >> daily_log.txt
+      - name: Update daily log
+        run: |
+          echo "Update: $(date -u)" >> daily_log.txt
 
-    - name: Commit and push changes
-      run: |
-        # SET YOUR IDENTITY HERE
-        git config --global user.name "Tejsvapandey1"
-        git config --global user.email "tejsva.pandey2023@vitstudent.ac.in "
+      - name: Commit and push changes
+        run: |
+          git config user.name "Tejsvapandey1"
+          git config user.email "tejsva.pandey2023@vitstudent.ac.in"
 
-        git add daily_log.txt
-        git commit -m "Auto-commit: $(date -u)" || echo "No changes to commit"
-        git push origin main
+          git add daily_log.txt
+          git commit -m "Auto-commit: $(date -u)" || exit 0
+          git push
